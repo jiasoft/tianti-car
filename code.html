@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <!-- <meta name="viewport" content="initial-scale=0.5,user-scalable=no" /> -->
+  <!-- import CSS -->
+  <style>
+      body,html{padding:0;margin: 0;}
+      #app{
+        
+        background: #93f5a2;
+        position: relative;
+        width: 1080px;
+        height: 2340px;  
+        overflow: hidden;
+      }
+      #green{
+          position: absolute;
+          top:458px;
+          left:50%;
+          margin-left: -217px;}
+      .green-code-label{
+          position: absolute;color:#6fd38a;
+          display: flex;flex-direction:row;flex-wrap: wrap;
+          width: 500%;
+          transform: scale(2);
+        }
+      .green-code-label div{
+        position: relative;
+        transform: rotate(-45deg );
+        width: 160px;
+        height: 160px;
+      }
+      .code-bg{
+        width: 1080px;
+        height: 2340px;  
+        position: absolute;
+        background: url(code.png);
+    }
+    .top-time{top:336px;left:50%;margin-left:-250px;position: absolute;font-size: 46px;color:#0766d0;font-family: 黑体;}
+    .time-48{top:1547px;margin-left:152px;position: absolute;font-size: 32px;color:#8d51fe;font-family: 黑体;}
+    .time-new-ym{top:1550px;left:712px;position: absolute;font-size: 30px;color:#959595;font-family: 黑体;}
+    .time{top:47px;right: 37px;position: absolute;font-size: 30px;color:#fff;font-family: 黑体;}
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="green-code-label" ref="greenCodeLabel" style="top:-2000px;left:43px;">
+        <div v-for="i in 1000" :key="i">绿码{{curDate}}</div>
+    </div>
+    <div class="code-bg"></div>
+    <img id="green" src="green.png" />
+    <div class="top-time">{{curDateTime}}</div>
+    <div class="time-48">{{curDateTime48}}</div>
+    <div class="time-new-ym">{{ymDate}}</div>
+    <div class="time">{{timeStr}}</div>
+  </div>
+  <script src="vue.js"></script>
+  <script>
+       
+      const vm = new Vue({
+        el: '#app',
+        data: function() {
+            const n = new Date();
+            let y = n.getFullYear();
+            let m = n.getMonth() +1;
+            let d = n.getDate();
+            m = m <=9?'0'+m:m;
+            d = d <=9 ? '0'+d:d;
+            let ym = new Date(n.setDate(n.getDate() - 20));
+            let ymy = ym.getFullYear();
+            let ymm = ym.getMonth() +1;
+            let ymd = ym.getDate();
+            ymm = ymm <=9?'0'+ymm:ymm;
+            ymd = ymd <=9 ? '0'+ymd:ymd; 
+            return { 
+                value:"",
+                curDate:y +'-' + m + '-' + d,
+                curDateTime:'',
+                curDateTime48:'',
+                ymDate:ymy +'-' + ymm + '-' + ymd,
+                timeStr:''
+            }
+        },
+        created(){
+          const n = new Date();
+          let y = n.getFullYear();
+          let m = n.getMonth() +1;
+          let d = n.getDate();
+          m = m <=9?'0'+m:m;
+          d = d <=9 ? '0'+d:d;
+          let h = n.getHours();
+          h = h <=9? '0'+h:h;
+          let mm = n.getMinutes();
+          mm = mm <= 9 ? '0'+mm:mm;
+          let s = n.getSeconds();
+          s = s <= 9?'0'+s:s;
+          this.curDateTime48 = y+'-'+m+'-'+d+' '+h+':'+mm+':'+s;
+            setInterval(()=>{
+                const n = new Date();
+                let y = n.getFullYear();
+                let m = n.getMonth() +1;
+                let d = n.getDate();
+                m = m <=9?'0'+m:m;
+                d = d <=9 ? '0'+d:d;
+                let h = n.getHours();
+                h = h <=9? '0'+h:h;
+                let mm = n.getMinutes();
+                mm = mm <= 9 ? '0'+mm:mm;
+                let s = n.getSeconds();
+                s = s <= 9?'0'+s:s;
+                this.curDateTime = y+'-'+m+'-'+d+' '+h+':'+mm+':'+s;
+                
+                this.timeStr = h+':'+ mm;
+                if(parseFloat(this.$refs.greenCodeLabel.style.top) > - 300){
+                    this.$refs.greenCodeLabel.style.top = '-2000px';
+                    this.$refs.greenCodeLabel.style.left ='43px'
+                }
+                
+                this.$refs.greenCodeLabel.style.left   = (parseFloat(this.$refs.greenCodeLabel.style.left||0) - 1)+'px'
+                this.$refs.greenCodeLabel.style.top   = (parseFloat(this.$refs.greenCodeLabel.style.top||0) + 1)+'px'
+            },13)
+            
+        }
+    });
+  </script>
+</body>
+ 
+</html>

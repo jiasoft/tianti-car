@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>所有車盤-天一汽車貿易有限公司</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="element.css" />
+    <link rel="stylesheet" href="index.css?v=3" />
+    <link rel="shortcut icon" href="favicon.ico" />
+  <style>
+    .all-car .search .center{    flex-direction: column;}
+    .box-search-r{display: flex;margin-top:20px}
+  </style>
+</head>
+<body class="all-car">
+  <div id="app">
+    <div class="top-ico-message">
+       
+        <div class="item">
+            <i class="ico ico_top_tel"></i>
+        </div>
+        <div class="item">
+            <i class="ico ico_top_what_app"></i>
+        </div>
+        <div class="item">
+            <i class="ico ico_top_we_chat"></i>
+        </div>
+        <div class="item">
+            <i class="ico ico_top_message"></i>
+        </div>
+        <div class="item">
+            <i class="ico ico_top_f"></i>
+        </div>
+    </div>
+    <div class="tool-msg">
+        <div class="item">
+            <i class="ico ico_green_tel"></i>
+        </div>
+        <div class="item">
+            <i class="ico ico_green_wx"></i>
+        </div>
+        <div class="item">
+            <div class="msg-button">
+                <i class="ico ico_write_mail"></i>聯系我們
+            </div>
+            
+        </div>
+    
+    </div>
+    <div class="head">
+        <div class="center head-item">
+            <div class="logo">
+                <a class="ico-logo" href=""></a>
+            </div>
+            <div class="nav" >
+                <div class="tool">
+                    <a href=""><i class="ico ico-fa"></i></a>
+                    <a href=""><i class="ico ico-bir"></i></a>
+                </div>
+                <div class="item-list">
+                    <a href="/">主頁</a> 
+                    <a href="all_car_list.html" class="active">所有車盤</a> 
+                    <a href="will_redeem_will.html">上會贖會</a> 
+                    <a href="high_car_list.html">高價收車</a>                                
+                    <a href="about_us.html" >關於我們</a>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+ 
+    <!--- search--->
+    <div class="search">
+        <div class="center">
+            <div class="ban-title"><img src="images/all_car.png" / ></div>
+            <div class="box-search-r">
+                <div class="title">
+                    <b>車盤搜尋</b>
+                </div>
+                <div class="input-list">
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--車廠--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--座位--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--出廠年月--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--容積CC--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--傳動--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--售價--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="col">
+                        <el-select v-model="value" placeholder="--狀況--">
+                            <el-option
+                                v-for="item in options"
+                                :key="item.value"
+                                :label="item.label"
+                                :value="item.value">
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div class="col">
+                        <el-input v-model="value" placeholder="请输入内容"></el-input>
+                    </div>
+                </div>
+                <div class="btn-tool">
+                
+                        <button type="button">搜尋</button>
+                        <button type="button" class="reset">重設</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---最新车盘--->
+    <div class="new-car">
+        <div class="center">
+           
+            <div class="c-list">
+                <!--car-->
+                <div class="car" v-for="(car,index) in carList" :key="index">
+                    <div class="box" @click="open('car_detail.html',null)">
+                        <div class="pic">
+                            <img :src="car.image" />
+                        </div>
+                        <div class="text">
+                            <div class="name">{{car.name}}</div>
+                            <div class="pri">HK${{car.priece}}</div>
+                            <div class="show-box">
+                                <div class="bd">出廠年份&nbsp;&nbsp;&nbsp;&nbsp;{{car.date_production}}</div>
+                                <div class="lg"> 首次登記年份&nbsp;&nbsp;&nbsp;&nbsp;{{car.register}}</div>
+                            </div>
+                        </div>
+                        <div class="logo-line">
+                            <div class="pro-info">
+                                <div>
+                                    <img :src="car.logo" />
+                                </div>
+                                <div>
+                                    <div class="car-name">{{car.name}}</div>
+                                    <div class="car-id">{{car.model}}</div>
+                                </div>
+                            </div>
+                            <div class="pro-price">
+                                HK${{car.priece}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+               
+            </div>
+            <div class="car-page">
+               
+                <el-pagination
+                  @size-change="handleSizeChange"
+                  @current-change="handleCurrentChange"
+                  :current-page="currentPage"
+                  :page-sizes="[100, 200, 300, 400]"
+                  :page-size="100"
+                  layout="total, sizes, prev, pager, next, jumper"
+                  :total="400">
+                </el-pagination>
+              </div>
+        </div>
+    </div>
+
+    <!---map--->
+    <div class="contact">
+        <div class="center">
+            <div>
+                <div class="map-img" >
+                    <img src="images/map.jpg" />
+                </div>
+            </div>
+            <div>
+                <div class="contact-info">
+                    <div class="title">聯絡我們 </div>
+                    <div class="contact-us">聯絡人: 林生</div>
+                    <div class="line"><i class="ico ico-tel"></i><span> 電話  : 67022822</span></div>
+                    <div class="line"><i class="ico ico_whatapp"></i><span> Whatspp  : 67022822</span></div>
+                    <div class="line"><i class="ico ico_fax"></i><span> 傳真: 24798882</span></div>
+                    <div class="line"><i class="ico ico_wx"></i><span> WE CHAT ID : 67022822</span></div>
+                    <div class="line"><i class="ico ico_msg"></i><span> 電郵 : tom@eddle.com.hk</span></div>
+                    <div class="line"><i class="ico ico_home"></i><span> 營業地址 : 元朗屏山坑尾村富田車場（天水圍西線站後面)<br />展銷場及維修部：洪水橋青山公路和平新村(德國餐廳旁)</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bottom-->
+    <div class="footer">
+        <div class="center">
+            <div>
+                <div class="item"><i class="el-icon-phone"></i><span>67022822</span></div>
+                <div class="item"><i class="el-icon-printer"></i><span>67022822</span></div>
+                <div class="item"><i class="el-icon-message"></i><span>67022822</span></div>
+            </div>
+            <div>
+                Power by Excellent Medial Limited
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+  <!-- import Vue before Element -->
+  <script src="vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="element.js"></script>
+  <script src="all_car_list.js"></script>
+
+</html>
